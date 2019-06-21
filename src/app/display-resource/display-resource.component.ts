@@ -72,6 +72,10 @@ export class DisplayResourceComponent implements OnInit {
     }
     this.selectedTier = event.container.data[0];
     this.emittedTier.emit(this.selectedTier);
+    if ( this.selectedTier === 'Tier1' ) {
+      this.tier = ['Region'];
+    }
+    
     $('.carousel').carousel('next');
 
   }
