@@ -9,11 +9,11 @@ declare let $:any;
 export class DividerComponent {
 
   items = [
-    'Region1',
-    'Region2',
-    'Region3',
-    'Region4',
-    'Region5'
+    'Ashburn',
+    'Phoenix',
+    'Frankfurt',
+    'London',
+    'Toronto'
   ];
 
   ads = [
