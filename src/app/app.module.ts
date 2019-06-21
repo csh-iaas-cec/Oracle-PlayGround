@@ -5,6 +5,7 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -25,7 +26,9 @@ import { DisplayResourceComponent } from './display-resource/display-resource.co
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
