@@ -11,7 +11,7 @@ export class DisplayResourceComponent implements OnInit {
 
   @Input() region: [];
   @Input() ad: [];
-  @Input() tier: [];
+  @Input() tier: string[];
   @Input() platform: [];
   @Input() os: [];
   selectedRegion: string;
@@ -73,9 +73,9 @@ export class DisplayResourceComponent implements OnInit {
     this.selectedTier = event.container.data[0];
     this.emittedTier.emit(this.selectedTier);
     if ( this.selectedTier === 'Tier1' ) {
-      this.tier = ['Region'];
+      this.tier = [];
+      this.tier.push('Subnet');
     }
-    
     $('.carousel').carousel('next');
 
   }
@@ -96,9 +96,8 @@ export class DisplayResourceComponent implements OnInit {
 
   }
 
-  deploy(){
-    console.log("calling api to pass variables.tf file");
-    
+  deploy() {
+    console.log('calling api to pass variables.tf file');
   }
 
 }
