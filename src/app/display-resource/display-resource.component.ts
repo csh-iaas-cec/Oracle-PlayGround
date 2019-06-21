@@ -12,7 +12,7 @@ export class DisplayResourceComponent implements OnInit {
 
   @Input() region: [];
   @Input() ad: [];
-  @Input() tier: [];
+  @Input() tier: string[];
   @Input() platform: [];
   @Input() os: [];
   selectedRegion: string;
@@ -74,6 +74,10 @@ export class DisplayResourceComponent implements OnInit {
     }
     this.selectedTier = event.container.data[0];
     this.emittedTier.emit(this.selectedTier);
+    if ( this.selectedTier === 'Tier1' ) {
+      this.tier = [];
+      this.tier.push('Subnet');
+    }
     $('.carousel').carousel('next');
 
   }
