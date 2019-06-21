@@ -96,4 +96,9 @@ export class DisplayResourceComponent implements OnInit {
 
   }
 
+  deploy(){
+    console.log("calling api to pass variables.tf file");
+    
+  }
+
 }
