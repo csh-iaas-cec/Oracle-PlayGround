@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ApiService } from '../api.service';
 declare let $:any;
 @Component({
   selector: 'app-display-resource',
@@ -20,13 +21,14 @@ export class DisplayResourceComponent implements OnInit {
   selectedPlatform: string;
   selectedOS: string;
   completed: boolean = false;
+  regionvars: string;
   @Output() emittedRegion: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedAd: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedTier: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedPlatform: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedOS: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor( private apiServices : ApiService ) { }
 
   ngOnInit() {
   }
@@ -96,8 +98,12 @@ export class DisplayResourceComponent implements OnInit {
 
   }
 
-  deploy() {
-    console.log('calling api to pass variables.tf file');
+  deploy(){
+    console.log("calling api to pass variables.tf file");
+    this.regionvars = `variable "region" {
+                        default = "${this.selectedRegion}"  
+                      }`;
+    this.apiServices.postRegionVars(this.regionvars);
   }
 
 }
