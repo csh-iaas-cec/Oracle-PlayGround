@@ -6,6 +6,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {HttpClientModule} from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+
 
 
 
@@ -27,7 +29,9 @@ import { DisplayResourceComponent } from './display-resource/display-resource.co
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule 
+    
 
   ],
   providers: [],

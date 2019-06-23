@@ -103,7 +103,10 @@ export class DisplayResourceComponent implements OnInit {
     this.regionvars = `variable "region" {
                         default = "${this.selectedRegion}"  
                       }`;
-    this.apiServices.postRegionVars(this.regionvars);
+    this.apiServices.postRegionVars(this.regionvars)
+    .subscribe(data =>{
+      console.log("====response data====",data);
+    });
   }
 
 }
