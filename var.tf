@@ -1,3 +1,3 @@
 var region {
-     default : "Ashburn"
+     default : "us-ashburn-1"
 }
