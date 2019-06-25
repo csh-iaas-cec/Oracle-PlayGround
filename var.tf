@@ -1,1 +1,3 @@
-test api working directly
+var region {
+     default : "Ashburn"
+}
