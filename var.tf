@@ -1,1 +1,1 @@
-testingtheapi
+test api working directly
