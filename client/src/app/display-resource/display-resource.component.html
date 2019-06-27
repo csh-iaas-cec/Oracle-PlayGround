@@ -9,7 +9,7 @@
 <div *ngIf="region.length"
   class="select-region-highlight">
   <div *ngFor="let item of region"
-    class="decorate-region-text" >{{item}}
+    class="decorate-region-text" >Region : {{item}}
   </div>
   <div
     *ngIf="!ad.length" 
@@ -23,7 +23,7 @@
     *ngIf="ad.length"
     class="select-ad-highlight">
     <div *ngFor="let item of ad" 
-      class="decorate-ad-text">{{item}}        
+      class="decorate-ad-text">AD : {{item}}        
     </div>
     <div
       *ngIf="!tier.length"
@@ -37,7 +37,7 @@
       *ngIf="tier.length"
       class="select-tier-highlight">
       <div *ngFor="let item of tier"
-        class="decorate-tier-text" >{{item}}
+        class="decorate-tier-text" >Public {{item}}  ::   Port: 8080/443
       </div>
       <div
         *ngIf="!platform.length"
@@ -54,6 +54,7 @@
         </div>
         <!---->
       </div>
+      
     </div>
     
   </div>

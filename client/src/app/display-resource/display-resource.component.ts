@@ -11,7 +11,7 @@ export class DisplayResourceComponent implements OnInit {
 
 
   @Input() region: [];
-  @Input() ad: [];
+  @Input() ad: string[];
   @Input() tier: string[];
   @Input() platform: [];
   @Input() os: [];
@@ -59,6 +59,10 @@ export class DisplayResourceComponent implements OnInit {
     }
     this.selectedAd = event.container.data[0];
     this.emittedAd.emit(this.selectedAd);
+    if( this.selectedAd === 'AD1'){
+      this.ad = [];
+      this.ad.push('AD ID');
+    }
     $('.carousel').carousel('next');
 
   }
@@ -94,7 +98,7 @@ export class DisplayResourceComponent implements OnInit {
     this.selectedPlatform = event.container.data[0];
     this.emittedPlatform.emit(this.selectedPlatform);
     $('.carousel').carousel('next');
-    this.completed = true;
+     this.completed = true;
 
   }
 

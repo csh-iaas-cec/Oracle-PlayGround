@@ -10,28 +10,48 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="display-text">Region</div>
           <div class="display-smaller-text">Select a region</div>
-          <app-resource-selector [items]="items" [isTier]="false" ></app-resource-selector>
+          <app-resource-selector class="content" [items]="items" [isTier]="false" ></app-resource-selector>
         </div>
         <div class="carousel-item">
-            <div class="display-text">Region</div>
-            <div class="display-smaller-text">Select a region</div>
+            <div class="display-text">AD</div>
+            <div class="display-smaller-text">Select a AD</div>
             <app-resource-selector [items]="ads" [isTier]="false"></app-resource-selector>
         </div>
         <div class="carousel-item">
-            <div class="display-text">Region</div>
-            <div class="display-smaller-text">Select a region</div>
+            <div class="display-text">Tier</div>
+            <div class="display-smaller-text">Select a Tier</div>
             <app-resource-selector [items]="tiers" [isTier]="false"></app-resource-selector>
         </div>
         <div class="carousel-item">
-          <div class="display-text">Region</div>
-          <div class="display-smaller-text">Select a region</div>
+          <div class="display-text">Application</div>
+          <div class="display-smaller-text">Select a Application</div>
           <app-resource-selector [items]="platforms"></app-resource-selector>
         </div>
+        <div class="carousel-item">
+          <div class="display-text">Deployment</div>
+          <div class="display-smaller-text">Deployment Information</div>
+          <ol class="dep">
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected region : <span style="color: #F29111">{{selectedRegion}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected AD :  <span style="color: #00758F">{{selectedAd}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected Subnet : <span style="color: #3A913F">{{selectedTier}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected Application : <span style="color: #f98bf9">{{selectedPlatform}}</span>
+            </li>
+          </ol>
+        </div>
+        
         
         
       </div>

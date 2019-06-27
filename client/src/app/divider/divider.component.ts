@@ -32,6 +32,7 @@ export class DividerComponent {
     'Web + Database'
   ];
 
+ 
   // OSs = [
   //   'Linux',
   //   'Windows'
@@ -44,6 +45,8 @@ export class DividerComponent {
   tier = [];
 
   platform = [];
+
+  
 
   // os = [];
 
