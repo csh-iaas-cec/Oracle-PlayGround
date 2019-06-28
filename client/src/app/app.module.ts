@@ -7,30 +7,30 @@ import {MatListModule} from '@angular/material/list';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
-
-
-
-
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DividerComponent } from './divider/divider.component';
 import { ResourceSelectorComponent } from './resource-selector/resource-selector.component';
 import { DisplayResourceComponent } from './display-resource/display-resource.component';
+import { HomeComponent } from './home/home.component';
+import { OutputComponent } from './output/output.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DividerComponent,
     ResourceSelectorComponent,
-    DisplayResourceComponent
+    DisplayResourceComponent,
+    HomeComponent,
+    OutputComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
     HttpClientModule,
-    HttpModule 
+    HttpModule,
+    AppRoutingModule
     
 
   ],

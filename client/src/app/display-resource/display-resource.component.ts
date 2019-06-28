@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ApiService } from '../api.service';
+import { ApigatewayService } from '../apigateway.service';
 declare let $:any;
 @Component({
   selector: 'app-display-resource',
@@ -28,7 +29,7 @@ export class DisplayResourceComponent implements OnInit {
   @Output() emittedPlatform: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedOS: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor( private apiServices : ApiService ) { }
+  constructor( private apiServices : ApiService, private apigatewayServices : ApigatewayService ) { }
 
   ngOnInit() {
   }
@@ -112,6 +113,7 @@ export class DisplayResourceComponent implements OnInit {
     .subscribe(data =>{
       console.log("====response data====",data);
     });
+    
   }
 
 }
