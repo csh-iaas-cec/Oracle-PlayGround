@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ApiService } from '../api.service';
 import { ApigatewayService } from '../apigateway.service';
+import { Response } from '@angular/http';
+import { Router } from '@angular/router';
 declare let $:any;
 @Component({
   selector: 'app-display-resource',
@@ -29,7 +31,7 @@ export class DisplayResourceComponent implements OnInit {
   @Output() emittedPlatform: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedOS: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor( private apiServices : ApiService, private apigatewayServices : ApigatewayService ) { }
+  constructor( private apiServices : ApiService, private apigatewayServices : ApigatewayService,private router: Router ) { }
 
   ngOnInit() {
   }
@@ -111,7 +113,11 @@ export class DisplayResourceComponent implements OnInit {
     // this.apiServices.postRegionVars(this.regionvars)
     this.apiServices.updateRegionData(this.regionvars)
     .subscribe(data =>{
-      console.log("====response data====",data);
+      console.log("getting the response");
+      console.log("====response data====",JSON.parse(JSON.stringify(data)));
+      localStorage.setItem('ocid',data);
+      console.log("===data from local storage===",localStorage.getItem('ocid'));
+      this.router.navigateByUrl("/output");
     });
     
   }
