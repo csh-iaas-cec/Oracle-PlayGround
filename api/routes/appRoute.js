@@ -9,6 +9,9 @@ module.exports = function(app){
         .get(git.getContent);
     
     app.route('/api/putContent')
-        .put(git.putContent)
+        .put(git.putContent);
+
+    app.route('/api/getOcid')
+        .get(git.getOcid);
 
 }

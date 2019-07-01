@@ -24,7 +24,8 @@ export class ApiService {
 
   updateRegionData(region): Observable<any> {
 
-    return this.http.put(`${this.localhost_URL}/api/putContent`,region);
+    return this.http.get(`${this.localhost_URL}/api/getOcid`, {responseType: 'text'});
+    
   }
  
 }

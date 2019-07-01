@@ -27,3 +27,17 @@ exports.putContent = function(req,res,next){
         }
     });
 }
+
+exports.getOcid = function(req,res,next){
+    
+    var getContent = new GetContentService();
+    
+    getContent.getOcid(req,function(err,result){
+        if(err){
+            return next(err);
+        }else{
+           
+            res.send(result);
+        }
+    });
+}

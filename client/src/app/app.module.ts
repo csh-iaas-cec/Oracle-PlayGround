@@ -14,6 +14,11 @@ import { ResourceSelectorComponent } from './resource-selector/resource-selector
 import { DisplayResourceComponent } from './display-resource/display-resource.component';
 import { HomeComponent } from './home/home.component';
 import { OutputComponent } from './output/output.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+// For MDB Angular Free
+import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +35,11 @@ import { OutputComponent } from './output/output.component';
     DragDropModule,
     HttpClientModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressBarModule,
+    CarouselModule,
+    WavesModule,
+    MatCardModule
     
 
   ],
