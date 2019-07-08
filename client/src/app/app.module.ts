@@ -18,6 +18,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 // For MDB Angular Free
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import {MatCardModule} from '@angular/material/card';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatCardModule} from '@angular/material/card';
     MatProgressBarModule,
     CarouselModule,
     WavesModule,
-    MatCardModule
+    MatCardModule,
+    NgxSpinnerModule
     
 
   ],
