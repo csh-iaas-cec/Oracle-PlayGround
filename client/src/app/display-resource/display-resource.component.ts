@@ -110,13 +110,14 @@ export class DisplayResourceComponent implements OnInit {
                         default = "${this.selectedRegion}"  
                       }`;
     // this.apiServices.postRegionVars(this.regionvars)
+    this.router.navigateByUrl("/output");
     this.apiServices.updateRegionData(this.regionvars)
     .subscribe(data =>{
       console.log("getting the response");
       console.log("====response data====",JSON.parse(JSON.stringify(data)));
       localStorage.setItem('ocid',data);
       console.log("===data from local storage===",localStorage.getItem('ocid'));
-      this.router.navigateByUrl("/output");
+      
     });
     
   }

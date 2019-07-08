@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-output',
@@ -8,11 +9,16 @@ import { interval } from 'rxjs';
 })
 export class OutputComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spinner: NgxSpinnerService) { }
   ocid:any;
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 20 seconds */
+      this.spinner.hide();
+      this.startTimer(20);
+  }, 5000);
    
-    this.startTimer(20);
   }
   progressbarValue = 0;
   curSec: number = 100;
