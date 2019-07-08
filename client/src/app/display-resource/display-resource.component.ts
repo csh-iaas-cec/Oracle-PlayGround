@@ -2,9 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ApiService } from '../api.service';
 import { ApigatewayService } from '../apigateway.service';
-import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-declare let $:any;
+declare let $;
 @Component({
   selector: 'app-display-resource',
   templateUrl: './display-resource.component.html',
@@ -23,7 +22,7 @@ export class DisplayResourceComponent implements OnInit {
   selectedTier: string;
   selectedPlatform: string;
   selectedOS: string;
-  completed: boolean = false;
+  completed = false;
   regionvars: string;
   @Output() emittedRegion: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedAd: EventEmitter<string> = new EventEmitter<string>();
@@ -31,7 +30,7 @@ export class DisplayResourceComponent implements OnInit {
   @Output() emittedPlatform: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedOS: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor( private apiServices : ApiService, private apigatewayServices : ApigatewayService,private router: Router ) { }
+  constructor( private apiServices: ApiService, private router: Router ) { }
 
   ngOnInit() {
   }
@@ -101,7 +100,7 @@ export class DisplayResourceComponent implements OnInit {
     this.selectedPlatform = event.container.data[0];
     this.emittedPlatform.emit(this.selectedPlatform);
     $('.carousel').carousel('next');
-     this.completed = true;
+    this.completed = true;
 
   }
 

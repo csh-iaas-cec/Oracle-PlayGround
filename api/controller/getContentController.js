@@ -41,3 +41,15 @@ exports.getOcid = function(req,res,next){
         }
     });
 }
+
+exports.getJob = function(req,res,next){
+    var getJob = new GetContentService();
+    getJob.getJob(req, function(err, result){
+        if(err){
+            return next(err);
+        }else{
+           
+            res.send(result);
+        }
+    });
+}

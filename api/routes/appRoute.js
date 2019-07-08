@@ -14,4 +14,7 @@ module.exports = function(app){
     app.route('/api/getOcid')
         .get(git.getOcid);
 
+    app.route('/api/getJob')
+        .get(git.getJob);
+
 }

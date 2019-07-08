@@ -2,8 +2,8 @@
 var express = require('express')
 var app = express();
 var bodyParser = require('body-parser');
-var path = require('path');
-var morgan = require('morgan');
+// var path = require('path');
+// var morgan = require('morgan');
 const cors = require('cors');
 
 var port = process.env.PORT || 3200;
