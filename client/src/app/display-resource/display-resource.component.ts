@@ -119,6 +119,10 @@ export class DisplayResourceComponent implements OnInit {
       console.log("===data from local storage===",localStorage.getItem('ocid'));
       
     });
+    this.apiServices.getJobState()
+    .subscribe(data => {
+      console.log(data.lifecycleState);
+    });
     
   }
 

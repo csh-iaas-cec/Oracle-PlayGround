@@ -14,7 +14,11 @@ export class ApiService {
   localhost_URL : any;
   constructor(public http: HttpClient) {
     this.localhost_URL = 'http://localhost:3200';
-   }
+  }
+
+  getJobState(): Observable<any> {
+    return this.http.get(`${this.localhost_URL}/api/getJob`);
+  }
   
    postRegionVars(region):  Observable<any>  {
 
