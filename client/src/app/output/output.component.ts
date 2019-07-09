@@ -11,6 +11,9 @@ export class OutputComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService) { }
   ocid:any;
+  progressbarValue = 0;
+  curSec: number = 100;
+
   ngOnInit() {
     this.spinner.show();
     setTimeout(() => {
@@ -20,8 +23,7 @@ export class OutputComponent implements OnInit {
   }, 5000);
    
   }
-  progressbarValue = 0;
-  curSec: number = 100;
+  
 
   startTimer(seconds: number) {
     const time = seconds;
@@ -32,7 +34,7 @@ export class OutputComponent implements OnInit {
       this.curSec = sec;
 
       if (this.curSec === seconds) {
-        this.ocid=localStorage.getItem('ocid');
+        this.ocid = localStorage.getItem('ocid');
         sub.unsubscribe();
       }
     });

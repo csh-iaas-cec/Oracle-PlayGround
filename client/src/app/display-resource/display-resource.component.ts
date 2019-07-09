@@ -104,26 +104,26 @@ export class DisplayResourceComponent implements OnInit {
 
   }
 
-  deploy(){
-    console.log("calling api to pass variables.tf file");
+  deploy() {
+    console.log('calling api to pass variables.tf file');
     this.regionvars = `variable "region" {
                         default = "${this.selectedRegion}"  
                       }`;
     // this.apiServices.postRegionVars(this.regionvars)
-    this.router.navigateByUrl("/output");
+    this.router.navigateByUrl('/output');
     this.apiServices.updateRegionData(this.regionvars)
     .subscribe(data =>{
-      console.log("getting the response");
-      console.log("====response data====",JSON.parse(JSON.stringify(data)));
+      console.log('getting the response');
+      console.log('====response data====', JSON.parse(JSON.stringify(data)));
       localStorage.setItem('ocid',data);
-      console.log("===data from local storage===",localStorage.getItem('ocid'));
-      
+      console.log('===data from local storage===', localStorage.getItem('ocid'));
+
     });
     this.apiServices.getJobState()
     .subscribe(data => {
       console.log(data.lifecycleState);
     });
-    
+
   }
 
 }
