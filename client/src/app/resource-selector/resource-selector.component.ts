@@ -20,5 +20,10 @@ export class ResourceSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
+  showBox(item: string){
+    if (item=="Ashburn" || item=="AD1" || item=="Tier1" || item=="Web")
+      return true;
+  }
+
 
 }
