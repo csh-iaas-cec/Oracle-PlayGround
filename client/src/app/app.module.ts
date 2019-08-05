@@ -19,6 +19,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import {MatCardModule} from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {WebcamModule} from 'ngx-webcam';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CarouselModule,
     WavesModule,
     MatCardModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    WebcamModule
     
 
   ],

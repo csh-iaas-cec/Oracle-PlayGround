@@ -3,6 +3,16 @@
     <h1>Welcome to Oracle Playground</h1>
     <input type="text" class="form-control" id="usr" class="user" placeholder="JOHN CARTER">
     <button class="btn btn-warning btn-lg" style="margin-top: -2px; margin-left: 10px;"><a routerLink="/playground" style="color: white;"> Start building </a></button>
+    <button class="btn btn-warning btn-lg" style="margin-top: -2px; margin-left: 10px; color:white;" (click)="showWebcam=true"> Upload Profile Image </button>
+    <button class="actionBtn" style="margin-top: -2px; margin-left: 10px;" (click)="triggerSnapshot();">Take A Snapshot</button>
+    <webcam  [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+    [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+    [videoOptions]="videoOptions"
+    [imageQuality]="1"
+    (cameraSwitched)="cameraWasSwitched($event)"
+    (initError)="handleInitError($event)"></webcam>
+  </div>
+  <div>
    
   </div>
 <!-- <button  ><a routerLink="/playground"> Start building </a></button> -->
