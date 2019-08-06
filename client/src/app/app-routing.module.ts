@@ -5,9 +5,9 @@ import { HomeComponent } from './home/home.component';
 import { OutputComponent } from './output/output.component';
 
 const appRoutes: Routes = [
-   { path:'' , component : HomeComponent},
-   { path:'playground' , component: DividerComponent },
-   {path:'output', component: OutputComponent}
+   { path: '' , component : HomeComponent},
+   { path: 'playground' , component: DividerComponent },
+   {path: 'output', component: OutputComponent}
 ];
 
 @NgModule({

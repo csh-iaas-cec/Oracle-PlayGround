@@ -5,8 +5,9 @@
   class="example-list"
   cdkDropListSortingDisabled
   (cdkDropListDropped)="drop($event)">
-  <div *ngFor="let item of items"  cdkDrag>
-    <div class="example-box" *ngIf="showBox(item); else grey_out ">{{item}}</div>
+  <!-- <div class="example-box" *ngFor="let item of items"  cdkDrag>{{item}}</div> -->
+  <div class="layout"  *ngFor="let item of items"   >
+    <div class="example-box"  *ngIf="showBox(item); else grey_out " cdkDrag>{{item}}</div>
     <ng-template #grey_out>
       <div class="example-box-grey">{{item}}</div>
     </ng-template>
