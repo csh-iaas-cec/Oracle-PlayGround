@@ -11,6 +11,7 @@ import {Observable} from 'rxjs/Observable';
 export class HomeComponent implements OnInit {
  // toggle webcam on/off
  public showWebcam = false;
+ public picture = null;
  public allowCameraSwitch = true;
  public multipleWebcamsAvailable = false;
  public deviceId: string;
@@ -56,7 +57,11 @@ export class HomeComponent implements OnInit {
 
  public handleImage(webcamImage: WebcamImage): void {
    console.info('received webcam image', webcamImage);
+   console.log('image url', webcamImage.imageAsDataUrl);
+   localStorage.setItem('image', webcamImage.imageAsDataUrl);
    this.webcamImage = webcamImage;
+   this.showWebcam = false;
+   this.picture = localStorage.getItem('image');
  }
 
  public cameraWasSwitched(deviceId: string): void {

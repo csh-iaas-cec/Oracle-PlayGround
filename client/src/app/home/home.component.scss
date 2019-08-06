@@ -1,13 +1,13 @@
 .bg-image {
     /* The image used */
-    background-image: url("../../assets/images/bg.jpg");
-  
-    /* Add the blur effect */
-    filter: blur(8px);
-    -webkit-filter: blur(2px);
+    //background-image: url("../../assets/images/bg.jpg");
+
+    // /* Add the blur effect */
+    // filter: blur(8px);
+    // -webkit-filter: blur(2px);
   
     /* Full height */
-    height: 800px; 
+    height: 59em; 
   
     /* Center and scale the image nicely */
     background-position: center;
@@ -30,8 +30,47 @@
   }
   .user{
     z-index: 2;
-    width: 50%;
+    width: 100%;
     padding: 12px;
     margin-top: 10px;
     
   }
+
+  .card{
+    height: relative;
+    max-width: 40em;
+    top: 20%;
+    left:35%;
+    border: 2px solid coral;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation: mymove 5s infinite; /* Safari 4.0 - 8.0 */
+    animation: mymove 5s infinite;
+    
+  @-webkit-keyframes mymove {
+    50% {border-color: rgb(209, 173, 230);}
+  }
+  
+  @keyframes mymove {
+    50% {border-color: rgb(209, 173, 230);}
+}
+
+}
+.profile{
+  width:15em;
+  height: 15em;
+  margin-left: 11em;
+}
+
+.btn{
+  background-color: coral;
+  -webkit-animation: button 5s infinite; /* Safari 4.0 - 8.0 */
+  animation: button 5s infinite;
+  
+@-webkit-keyframes button {
+  50% {background-color: rgb(209, 173, 230);}
+}
+
+@keyframes button {
+  50% {background-color: rgb(209, 173, 230);}
+}
+}
