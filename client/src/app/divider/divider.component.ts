@@ -29,7 +29,7 @@ export class DividerComponent {
 
   platforms = [
     'Web',
-    'Web + Database'
+    'Web/Database'
   ];
 
  

@@ -16,10 +16,15 @@ export class ResourceSelectorComponent implements OnInit {
 
   @Input() isTier2: boolean;
 
+  // tslint:disable-next-line: quotemark
+  imageLocation = "url('../../assets/region.png')";
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  
 
   showBox(item: string){
     if (item === 'Ashburn' || item === 'AD1' || item === 'Tier1' || item === 'Web') {
