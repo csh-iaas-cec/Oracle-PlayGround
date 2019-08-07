@@ -20,6 +20,9 @@ import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import {MatCardModule} from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {WebcamModule} from 'ngx-webcam';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import {WebcamModule} from 'ngx-webcam';
     WavesModule,
     MatCardModule,
     NgxSpinnerModule,
-    WebcamModule
+    WebcamModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatTableModule
     
 
   ],
