@@ -110,7 +110,7 @@ export class DisplayResourceComponent implements OnInit {
                         default = "${this.selectedRegion}"  
                       }`;
     // this.apiServices.postRegionVars(this.regionvars)
-    this.router.navigateByUrl('/output');
+    this.router.navigateByUrl('/loader');
     this.apiServices.updateRegionData(this.regionvars)
     .subscribe(data =>{
       console.log('getting the response');

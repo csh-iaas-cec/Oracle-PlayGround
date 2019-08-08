@@ -23,6 +23,9 @@ import {WebcamModule} from 'ngx-webcam';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LoaderComponent } from './loader/loader.component';
+import { LoadersCssModule } from 'angular2-loaders-css';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import {MatTableModule} from '@angular/material/table';
     ResourceSelectorComponent,
     DisplayResourceComponent,
     HomeComponent,
-    OutputComponent
+    OutputComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import {MatTableModule} from '@angular/material/table';
     WebcamModule,
     MatIconModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    AngularFontAwesomeModule,
+    LoadersCssModule
     
 
   ],
