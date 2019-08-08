@@ -23,7 +23,7 @@
     *ngIf="ad.length"
     class="select-ad-highlight">
     <div *ngFor="let item of ad" 
-      class="decorate-ad-text">AD : {{item}}        
+      class="decorate-ad-text">AD : {{item | slice: -4}}       
     </div>
     <div
       *ngIf="!tier.length"

@@ -24,10 +24,9 @@ export class ResourceSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  
 
-  showBox(item: string){
-    if (item === 'Ashburn' || item === 'AD1' || item === 'Tier1' || item === 'Web') {
+  showBox(item: string) {
+    if (item === 'Ashburn' || item === 'XqVg:US-ASHBURN-AD-1' || item === 'Tier1' || item === 'Web') {
       return true;
     }
   }

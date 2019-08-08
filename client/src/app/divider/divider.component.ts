@@ -17,9 +17,9 @@ export class DividerComponent {
   ];
 
   ads = [
-    'AD1',
-    'AD2',
-    'AD3'
+    'XqVg:US-ASHBURN-AD-1',
+    'XqVg:US-ASHBURN-AD-2',
+    'XqVg:US-ASHBURN-AD-3'
   ];
 
   tiers = [
