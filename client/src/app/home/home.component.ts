@@ -9,6 +9,18 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  private focusoutfn(event) {
+    console.log('FN',event.target.value);
+    localStorage.setItem("fn",event.target.value);
+    }
+    private focusoutln(event) {
+      console.log('LN',event.target.value);
+      localStorage.setItem("ln",event.target.value);
+      }
+      private focusoutemail(event) {
+        console.log('Email',event.target.value);
+        localStorage.setItem("email",event.target.value);
+        }
  // toggle webcam on/off
  public showWebcam = false;
  public picture = null;

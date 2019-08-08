@@ -14,9 +14,9 @@
     (cameraSwitched)="cameraWasSwitched($event)"
     (initError)="handleInitError($event)" style="margin-left:3em;"></webcam>
     <button class="btn btn-warning btn-lg" style="margin-top: -2px; margin-left: 10em;" (click)="triggerSnapshot();" *ngIf="showWebcam">Take A Snapshot</button>
-    <input type="text" class="form-control" id="fn" class="user" placeholder="First Name">
-    <input type="text" class="form-control" id="ln" class="user" placeholder="Last Name">
-    <input type="text" class="form-control" id="email" class="user" placeholder="email">
+    <input type="text" class="form-control" id="fn" (focusout) = "focusoutfn($event)" class="user" placeholder="First Name">
+    <input type="text" class="form-control" id="ln" (focusout) = "focusoutln($event)" class="user" placeholder="Last Name">
+    <input type="text" class="form-control" id="email" (focusout) = "focusoutemail($event)" class="user" placeholder="email">
     <button class="btn btn-lg btn" style="margin-top: 1em; margin-left: 10em;"><a routerLink="/playground" style="color: white;"> Start building </a></button>
  
   

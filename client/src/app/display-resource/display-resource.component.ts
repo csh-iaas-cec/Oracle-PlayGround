@@ -24,6 +24,10 @@ export class DisplayResourceComponent implements OnInit {
   selectedOS: string;
   completed = false;
   regionvars: string;
+  firstname;
+  lastname;
+  email;
+  image;
   @Output() emittedRegion: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedAd: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedTier: EventEmitter<string> = new EventEmitter<string>();
@@ -106,8 +110,24 @@ export class DisplayResourceComponent implements OnInit {
 
   deploy() {
     console.log('calling api to pass variables.tf file');
+    this.firstname = localStorage.getItem('fn');
+    this.lastname = localStorage.getItem('ln');
+    this.email = localStorage.getItem('email');
+    this.image = localStorage.getItem('image');
     this.regionvars = `variable "region" {
                         default = "${this.selectedRegion}"  
+                      }
+                      variable "fn"{
+                        default = "${this.firstname}"
+                      }
+                      variable "ln"{
+                        default = "${this.lastname}"
+                      }
+                      variable "email"{
+                        default = "${this.email}"
+                      }
+                      variable "image"{
+                        default = "${this.image}"
                       }`;
     // this.apiServices.postRegionVars(this.regionvars)
     this.router.navigateByUrl('/loader');
