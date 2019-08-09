@@ -16,7 +16,9 @@ exports.getContent = function(req,res,next){
 }
 
 exports.putContent = function(req,res,next){
-    // console.log("===request in controller ====",req);
+    //  console.log("===request in controller ====",req.param);
+    //  console.log("===request in controller ====",req.body);
+    //  console.log("request in controller", req.query);
     var putContent = new GetContentService();
     putContent.putContentCall(req,function(err,result){
         if(err){

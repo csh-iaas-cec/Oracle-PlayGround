@@ -28,6 +28,7 @@ export class DisplayResourceComponent implements OnInit {
   lastname;
   email;
   image;
+  sha;
   @Output() emittedRegion: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedAd: EventEmitter<string> = new EventEmitter<string>();
   @Output() emittedTier: EventEmitter<string> = new EventEmitter<string>();
@@ -126,23 +127,33 @@ export class DisplayResourceComponent implements OnInit {
                       variable "email"{
                         default = "${this.email}"
                       }
-                      variable "image"{
-                        default = "${this.image}"
-                      }`;
+                      
+                     `;
     // this.apiServices.postRegionVars(this.regionvars)
     this.router.navigateByUrl('/loader');
-    this.apiServices.updateRegionData(this.regionvars)
-    .subscribe(data =>{
-      console.log('getting the response');
-      console.log('====response data====', JSON.parse(JSON.stringify(data)));
-      localStorage.setItem('ocid',data);
-      console.log('===data from local storage===', localStorage.getItem('ocid'));
+    // this.apiServices.updateRegionData(this.regionvars)
+    // .subscribe(data =>{
+    //   console.log('getting the response');
+    //   console.log('====response data====', JSON.parse(JSON.stringify(data)));
+    //   localStorage.setItem('ocid',data);
+    //   console.log('===data from local storage===', localStorage.getItem('ocid'));
 
-    });
-    this.apiServices.getJobState()
+    // });
+    // this.apiServices.getJobState()
+    // .subscribe(data => {
+    //   console.log(data.lifecycleState);
+    // });
+    this.apiServices.getContent()
     .subscribe(data => {
-      console.log(data.lifecycleState);
-    });
+      console.log("sha", data.sha);
+      this.sha = data.sha;
+      var content = `{ "sha" : "${this.sha}","content" : "${btoa(this.regionvars)}"}`
+      var result = JSON.parse(content);
+      this.apiServices.putContent(result)
+      .subscribe( result => {
+        console.log("output of putcontent" , result);
+      })
+    })
 
   }
 

@@ -2,11 +2,11 @@
 var request = require("request");
 // require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 //var config = require('../config')
-var fs = require('fs');
+// var fs = require('fs');
 var https = require('https');
-var os = require('os');
-var httpSignature = require('http-signature');
-var jsSHA = require("jssha");
+// var os = require('os');
+// var httpSignature = require('http-signature');
+// var jsSHA = require("jssha");
 
 class GetContentService{
 
@@ -117,7 +117,12 @@ class GetContentService{
 
     putContentCall(req,callback){
         // console.log("=== request for upload===",req);
-        // let data = req.body;  
+         let data = req.body; 
+         
+         console.log("data of put", data);
+         console.log("data of put", data.content.sha);
+         console.log("data of content", data.content.content);
+        //  console.log("data of put", data.payload.region);
         // let buff = new Buffer.alloc(data);  
         // let base64data = buff.toString('base64');
         var options = { method: 'PUT',
@@ -128,20 +133,20 @@ class GetContentService{
            Host: 'api.github.com',
            'Cache-Control': 'no-cache',
            Accept: '*/*',
-           'User-Agent': 'PostmanRuntime/7.15.0',
-           //auth to be added
-           'Content-Type': 'application/json' },
+           'User-Agent': 'PostmanRuntime/7.15.2',
+           Authorization: 'Bearer 65c874c165a33ecd28fa80227624b6be5a40528e',
+         },
         body: 
          { message: 'my commit message',
            committer: { name: 'csh-iaas-cec', email: 'ravi.devarakonda@oracle.com' },
-           content: "dmFyIHJlZ2lvbiB7CiAgICAgZGVmYXVsdCA6ICJ1cy1hc2hidXJuLTEiCn0=",
-           sha: '61cfcf04218e50585e377c3349814bf79322455e' },
+           content: data.content.content,
+           sha: data.content.sha },
         json: true };
-
+      
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
       
-        callback(null,body);
+        console.log(body);
       });
     }
 

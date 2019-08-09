@@ -101,7 +101,7 @@ export class LoaderComponent implements OnInit {
         this.timeLeft--;
       }
        else {
-        this.timeLeft = 60;
+        // this.timeLeft = 60;
         this.router.navigate(['/output']);
 
       }

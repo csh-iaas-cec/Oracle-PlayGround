@@ -18,8 +18,14 @@ export class ApiService {
     return this.http.get(`${this.localhost_URL}/api/getJob`);
   }
 
-  postRegionVars(region): Observable<any>  {
+  getContent(): Observable<any>  {
     return this.http.get(`${this.localhost_URL}/api/getContent`);
+  }
+
+  putContent(content): Observable<any>  {
+    
+    console.log("content", content);
+    return this.http.put(`${this.localhost_URL}/api/putContent`,{content});
   }
 
   updateRegionData(region): Observable<any> {
