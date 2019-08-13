@@ -15,6 +15,6 @@ module.exports = function(app){
         .get(git.getOcid);
 
     app.route('/api/getJob')
-        .get(git.getJob);
+        .post(git.getJob);
 
 }

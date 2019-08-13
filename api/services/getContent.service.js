@@ -1,5 +1,9 @@
 'use strict';
 var request = require("request");
+
+var bodyParser = require('body-parser');
+
+
 // require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 //var config = require('../config')
 // var fs = require('fs');
@@ -120,8 +124,8 @@ class GetContentService{
          let data = req.body; 
          
          console.log("data of put", data);
-         console.log("data of put", data.content.sha);
-         console.log("data of content", data.content.content);
+        //  console.log("data of put", data.content.sha);
+        //  console.log("data of content", data.content.content);
         //  console.log("data of put", data.payload.region);
         // let buff = new Buffer.alloc(data);  
         // let base64data = buff.toString('base64');
@@ -134,7 +138,7 @@ class GetContentService{
            'Cache-Control': 'no-cache',
            Accept: '*/*',
            'User-Agent': 'PostmanRuntime/7.15.2',
-           Authorization: 'Bearer 65c874c165a33ecd28fa80227624b6be5a40528e',
+           Authorization: 'Bearer e44df2342f3f9960ed053f511efe1002d2407aad',
          },
         body: 
          { message: 'my commit message',
@@ -142,7 +146,6 @@ class GetContentService{
            content: data.content.content,
            sha: data.content.sha },
         json: true };
-      
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
       
@@ -155,11 +158,11 @@ class GetContentService{
     getOcid(req,callback){
       var options = { method: 'GET',
       "rejectUnauthorized": false, 
-      url: 'https://loyvqirq7pnrdcxamvak67uxoq.apigateway.us-phoenix-1.oci.customer-oci.com/v1/myfn',
+      url: 'https://k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com/v1/getJobId',
       headers: 
        { 'cache-control': 'no-cache',
          Connection: 'keep-alive',
-         Host: 'loyvqirq7pnrdcxamvak67uxoq.apigateway.us-phoenix-1.oci.customer-oci.com',
+         Host: 'k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com',
          'Cache-Control': 'no-cache',
          Accept: '*/*',
          'User-Agent': 'PostmanRuntime/7.15.0',
@@ -172,6 +175,30 @@ class GetContentService{
       console.log(body);
       callback(null,body);
     });
+  }
+
+  getJob(req, callback){
+    var data = req.body;
+    //console.log("jobid in content service",data.jobId);
+    var options = { method: 'POST',
+  url: 'https://k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com/v1/getIp',
+  headers: 
+   { 'cache-control': 'no-cache',
+     Connection: 'keep-alive',
+     Host: 'k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com',
+     'Cache-Control': 'no-cache',
+     Accept: '*/*',
+     'User-Agent': 'PostmanRuntime/7.15.2',
+     'Content-Type': 'application/json' },
+  body: { jobId : data.jobId},
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  //console.log(body);
+  callback(null,body);
+});
   }
 }
 module.exports = GetContentService;

@@ -14,8 +14,8 @@ export class ApiService {
     this.localhost_URL = 'http://localhost:3200';
   }
 
-  getJobState(): Observable<any> {
-    return this.http.get(`${this.localhost_URL}/api/getJob`);
+  getJobState(jobId): Observable<any> {
+    return this.http.post(`${this.localhost_URL}/api/getJob`,{jobId},{responseType: 'text'});
   }
 
   getContent(): Observable<any>  {
@@ -28,7 +28,7 @@ export class ApiService {
     return this.http.put(`${this.localhost_URL}/api/putContent`,{content});
   }
 
-  updateRegionData(region): Observable<any> {
+  getOcid(): Observable<any> {
     return this.http.get(`${this.localhost_URL}/api/getOcid`, {responseType: 'text'});
   }
 

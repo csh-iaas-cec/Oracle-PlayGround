@@ -115,6 +115,10 @@ export class DisplayResourceComponent implements OnInit {
     this.lastname = localStorage.getItem('ln');
     this.email = localStorage.getItem('email');
     this.image = localStorage.getItem('image');
+    localStorage.setItem('Region',this.selectedRegion);
+    localStorage.setItem('AD',this.selectedAd);
+    localStorage.setItem('Tier',this.selectedTier);
+    localStorage.setItem('Platform',this.selectedPlatform);
     this.regionvars = `variable "region" {
                         default = "${this.selectedRegion}"  
                       }
@@ -127,10 +131,10 @@ export class DisplayResourceComponent implements OnInit {
                       variable "email"{
                         default = "${this.email}"
                       }
-                      
+                     
                      `;
     // this.apiServices.postRegionVars(this.regionvars)
-    this.router.navigateByUrl('/loader');
+    
     // this.apiServices.updateRegionData(this.regionvars)
     // .subscribe(data =>{
     //   console.log('getting the response');
@@ -152,8 +156,15 @@ export class DisplayResourceComponent implements OnInit {
       this.apiServices.putContent(result)
       .subscribe( result => {
         console.log("output of putcontent" , result);
+       
+      })
+      this.apiServices.getOcid()
+      .subscribe( id =>{
+        console.log("ocid of the job", id);
+        localStorage.setItem('ocid',id);
       })
     })
+    this.router.navigateByUrl('/loader');
 
   }
 
