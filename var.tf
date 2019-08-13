@@ -5,8 +5,10 @@ variable "region" {
                         default = "Kishore"
                       }
                       variable "ln"{
-                        default = "Kuar"
+                        default = "kdf"
                       }
                       variable "email"{
-                        default = "kis@gmail"
+                        default = "sadf@dsaf"
                       }
+                     
+                     
