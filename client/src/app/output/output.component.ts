@@ -23,6 +23,7 @@ export class OutputComponent implements OnInit {
    jobOcid;
    message;
    id;
+   show:any = false;
   constructor(private spinner: NgxSpinnerService, private apiServices: ApiService ) { }
   ocid:any;
   // progressbarValue = 0;
@@ -56,6 +57,34 @@ export class OutputComponent implements OnInit {
     description : "Platform",
     status      : "created"
   });
+  this.jobOcid = localStorage.getItem("ocid");
+  this.message = JSON.stringify(this.jobOcid);
+  console.log("ocid message", this.message);
+  console.log("this id" , this.id);
+  if(this.message.includes("function failed")){
+    this.dataSource.push({
+      number : "4",
+      name    : "Web-Server",
+      description : "Web server inside public subnet",
+      status      : "function failed .."
+    });
+  }
+  else if (this.id != null){
+    this.dataSource.push({
+      number : "4",
+      name    : "Web-Server",
+      description : "Web server inside public subnet",
+      status      : this.id
+    });
+   
+  } else{
+    this.dataSource.push({
+      number : "4",
+      name    : "Web-Server",
+      description : "Web server inside public subnet",
+      status      : "creating"
+    });
+  }
   
  
   this.startTimer()
@@ -86,36 +115,13 @@ export class OutputComponent implements OnInit {
           }
         }
         localStorage.setItem("ip",this.id);
+        if(this.id.search("Webserver")!=-1){
+          this.show = true
+        }
+       ;
         
     })
-    this.jobOcid = localStorage.getItem("ocid");
-  this.message = JSON.stringify(this.jobOcid);
-  console.log("ocid message", this.message);
-  console.log("this id" , this.id);
-  if(this.jobOcid.message == "function failed"){
-    this.dataSource.push({
-      number : "4",
-      name    : "Web-Server",
-      description : "Web server inside public subnet",
-      status      : "function failed .."
-    });
-  }
-  else if (this.id != null){
-    this.dataSource.push({
-      number : "4",
-      name    : "Web-Server",
-      description : "Web server inside public subnet",
-      status      : this.id
-    });
    
-  } else{
-    this.dataSource.push({
-      number : "4",
-      name    : "Web-Server",
-      description : "Web server inside public subnet",
-      status      : "creating.."
-    });
-  }
 
   }
 }

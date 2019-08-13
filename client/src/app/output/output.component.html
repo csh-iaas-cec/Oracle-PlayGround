@@ -73,6 +73,9 @@ bdColor="rgba(51,51,51,0.8)"
               </div>
 
         </div>
+        <div *ngIf = show >
+          <h3>web server ip is</h3>{{id | slice:16:32}}
+        </div>
       </div>
 
      
