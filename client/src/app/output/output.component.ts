@@ -107,9 +107,17 @@ export class OutputComponent implements OnInit {
               });
               this.timeLeft--;
               if(this.id){
-                this.timeLeft = 0;
+                // this.timeLeft = 0;
                 if(this.id.search("Webserver")!=-1){
                   this.show = true
+                  this.timeLeft = 0;
+                }
+                else if( this.id.includes("function failed")){
+                  console.log("function failed");
+                  this.timeLeft=0;
+                }
+                else{
+                  console.log(this.id);
                 }
                 
               }
