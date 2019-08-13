@@ -95,8 +95,7 @@ export class OutputComponent implements OnInit {
     this.jobOcid = localStorage.getItem("ocid");
     
     this.interval = setInterval(() => {
-        for(this.timeLeft ; this.timeLeft > 0 ; this.timeLeft -- ){
-          if(this.timeLeft == 15 || this.timeLeft == 30 || this.timeLeft == 45|| this.timeLeft == 60|| this.timeLeft == 75|| this.timeLeft == 90|| this.timeLeft == 105|| this.timeLeft == 120|| this.timeLeft == 135|| this.timeLeft == 150|| this.timeLeft == 165|| this.timeLeft == 180|| this.timeLeft == 195|| this.timeLeft == 210|| this.timeLeft == 225|| this.timeLeft == 245) {
+          if(this.timeLeft>0 && this.timeLeft % 15 == 0) {
             
             //console.log("job ocid", this.jobOcid);
             if(this.jobOcid != null){
@@ -106,22 +105,29 @@ export class OutputComponent implements OnInit {
                 this.id =ip;
                 
               });
-              
+              this.timeLeft--;
+              if(this.id){
+                this.timeLeft = 0;
+                if(this.id.search("Webserver")!=-1){
+                  this.show = true
+                }
+                
+              }
             }
             else{
               console.log("fetching job ocid");
             }
           
+          } else if(this.timeLeft>0) {
+            console.log("Fetching IP "+ this.timeLeft);
+            this.timeLeft -- ;
           }
-        }
         localStorage.setItem("ip",this.id);
-        if(this.id.search("Webserver")!=-1){
-          this.show = true
-        }
-       ;
         
-    })
-   
+       
+        
+    }, 1000);
+    
 
   }
 }

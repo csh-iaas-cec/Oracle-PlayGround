@@ -138,7 +138,6 @@ class GetContentService{
            'Cache-Control': 'no-cache',
            Accept: '*/*',
            'User-Agent': 'PostmanRuntime/7.15.2',
-           Authorization: 'Bearer e44df2342f3f9960ed053f511efe1002d2407aad',
          },
         body: 
          { message: 'my commit message',
