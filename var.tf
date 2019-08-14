@@ -2,13 +2,13 @@ variable "region" {
                         default = "Ashburn"  
                       }
                       variable "fn"{
-                        default = "Kishore"
+                        default = "raghib"
                       }
                       variable "ln"{
-                        default = "Raju"
+                        default = "last"
                       }
                       variable "email"{
-                        default = "kishore@gmail.com"
+                        default = "email"
                       }
                      
                      
