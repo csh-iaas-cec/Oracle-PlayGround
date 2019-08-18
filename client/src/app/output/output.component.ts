@@ -26,30 +26,24 @@ export class OutputComponent implements OnInit {
    show:any = false;
   constructor(private spinner: NgxSpinnerService, private apiServices: ApiService ) { }
   ocid:any;
-  // progressbarValue = 0;
-  // curSec: number = 100;
+  
  
 
   ngOnInit() {
-  //   this.spinner.show();
-  //   setTimeout(() => {
-  //     /** spinner ends after 20 seconds */
-  //     this.spinner.hide();
-  //     this.startTimer(20);
-  // }, 5000);
+  
 
   this.dataSource = [];
   this.dataSource.push({
     number : "1",
     name    : this.region,
     description : "Region",
-    status      : "created"
+    status      : "Selected"
   });
   this.dataSource.push({
     number : "2",
     name    : this.ad,
     description : "Availability domain",
-    status      : "created"
+    status      : "Selected"
   });
   this.dataSource.push({
     number : "3",
@@ -97,7 +91,7 @@ export class OutputComponent implements OnInit {
     this.interval = setInterval(() => {
           if(this.timeLeft>0 && this.timeLeft % 15 == 0) {
             
-            //console.log("job ocid", this.jobOcid);
+            
             if(this.jobOcid != null){
               this.apiServices.getJobState(this.jobOcid)
               .subscribe( ip => {
@@ -112,8 +106,9 @@ export class OutputComponent implements OnInit {
                   this.show = true
                   this.timeLeft = 0;
                 }
-                else if( this.id.includes("function failed")){
+                else if( this.id.includes("function failed") || this.id.includes("FAILED")){
                   console.log("function failed");
+                  this.show = true
                   this.timeLeft=0;
                 }
                 else{
