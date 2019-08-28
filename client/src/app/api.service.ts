@@ -32,4 +32,8 @@ export class ApiService {
     return this.http.get(`${this.localhost_URL}/api/getOcid`, {responseType: 'text'});
   }
 
+  putDetails(fname, lname, email, image): Observable<any> {
+    return this.http.get(`${this.localhost_URL}/api/putDetails?fname=` + fname + `&lname=` + lname + `&email=` + email + `&image=` + image , {responseType: 'text'});
+  }
+
 }

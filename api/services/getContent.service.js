@@ -4,97 +4,131 @@ var request = require("request");
 var bodyParser = require('body-parser');
 
 
-// require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
-//var config = require('../config')
-// var fs = require('fs');
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
+var config = require('../config')
+var fs = require('fs');
 var https = require('https');
-// var os = require('os');
-// var httpSignature = require('http-signature');
-// var jsSHA = require("jssha");
+var os = require('os');
+var httpSignature = require('http-signature');
+var jsSHA = require("jssha");
+var saveObj = require('./saveObject.js')
+
+
 
 class GetContentService{
 
 
   
-  // sign(request, options) {
+  sign(request, options) {
 
-  //   var apiKeyId = options.tenancyId + "/" + options.userId + "/" + options.keyFingerprint;
+    var apiKeyId = options.tenancyId + "/" + options.userId + "/" + options.keyFingerprint;
 
-  //   var headersToSign = [
-  //       "host",
-  //       "date",
-  //       "(request-target)"
-  //   ];
+    var headersToSign = [
+        "host",
+        "date",
+        "(request-target)"
+    ];
 
-  //   var methodsThatRequireExtraHeaders = ["POST", "PUT"];
+    var methodsThatRequireExtraHeaders = ["POST", "PUT"];
 
-  //   if(methodsThatRequireExtraHeaders.indexOf(request.method.toUpperCase()) !== -1) {
-  //       options.body = options.body || "";
+    if(methodsThatRequireExtraHeaders.indexOf(request.method.toUpperCase()) !== -1) {
+        options.body = options.body || "";
 
-  //       var shaObj = new jsSHA("SHA-256", "TEXT");
-  //       shaObj.update(options.body);
+        var shaObj = new jsSHA("SHA-256", "TEXT");
+        shaObj.update(options.body);
 
-  //       request.setHeader("Content-Length", options.body.length);
-  //       request.setHeader("x-content-sha256", shaObj.getHash('B64'));
+        request.setHeader("Content-Length", options.body.length);
+        request.setHeader("x-content-sha256", shaObj.getHash('B64'));
 
-  //       headersToSign = headersToSign.concat([
-  //           "content-type",
-  //           "content-length",
-  //           "x-content-sha256"
-  //       ]);
-  //   }
+        headersToSign = headersToSign.concat([
+            "content-type",
+            "content-length",
+            "x-content-sha256"
+        ]);
+    }
 
-  //   httpSignature.sign(request, {
-  //       key: options.privateKey,
-  //       keyId: apiKeyId,
-  //       headers: headersToSign
-  //   });
+    httpSignature.sign(request, {
+        key: options.privateKey,
+        keyId: apiKeyId,
+        headers: headersToSign
+    });
 
-  //   var newAuthHeaderValue = request.getHeader("Authorization").replace("Signature ", "Signature version=\"1\",");
-  //   request.setHeader("Authorization", newAuthHeaderValue);
-  // }
+    var newAuthHeaderValue = request.getHeader("Authorization").replace("Signature ", "Signature version=\"1\",");
+    request.setHeader("Authorization", newAuthHeaderValue);
+  }
 
-  // handleRequest(callback) {
+  handleRequest(callback) {
 
-  //   return function(response) {
-  //       var responseBody = "";
+    return function(response) {
+        var responseBody = "";
 
-  //       response.on('data', function(chunk) {
-  //       responseBody += chunk;
-  //   });
+        response.on('data', function(chunk) {
+          responseBody += chunk;
+        });
 
-  //       response.on('end', function() {
-  //           callback(null, JSON.parse(responseBody));
-  //       });
-  //   }
-  // }
+        response.on('end', function() {
+            console.log(responseBody);            
+            callback(null, JSON.parse(responseBody));
+        });
+    }
+  }
 
-  // getJob(req, callback) {
-
+  // putImage(req, callback) {
   //   var tenancyId = config.tenancyId;
   //   var authUserId = config.authUserId;
   //   var keyFingerprint = config.keyFingerprint;
   //   var privateKeyPath = config.privateKeyPath;
-  //   var resourceDomain = config.resourceDomain;
-  //   var jobId = "ocid1.ormjob.oc1.iad.aaaaaaaazaqo3pokn4mbzeihztve7wj5pbmxs27q74p7skstk7rjsb767unq";
   //   privateKeyPath = privateKeyPath.replace("~", os.homedir())
   //   var privateKey = fs.readFileSync(privateKeyPath, 'ascii');
+  //   var options = {
+  //     host: "objectstorage.us-ashburn-1.oraclecloud.com",
+  //     path: "/n/orasenatdhubsred01/b/kishore/o/image.txt" ,
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json"
+  //     }
+  //   };
+  //   var request = https.request(options, this.handleRequest(callback));
+  //   var body = JSON.stringify({ input: "Kumar" })
+  //   this.sign(request, {
+  //     body: body,
+  //     privateKey: privateKey,
+  //     keyFingerprint: keyFingerprint,
+  //     tenancyId: tenancyId,
+  //     userId: authUserId
+  //   });
 
-  //     var options = {
-  //         host: resourceDomain,
-  //         path: "/20180917/jobs/"+jobId ,
-  //     };
-
-  //     var request = https.request(options, this.handleRequest(callback));
-  //     this.sign(request, {
-  //         privateKey: privateKey,
-  //         keyFingerprint: keyFingerprint,
-  //         tenancyId: tenancyId,
-  //         userId: authUserId
-  //     });
-
-  //     request.end();
+  //   request.end(body);
   // }
+
+  
+
+  getJob(req, callback) {
+
+    var tenancyId = config.tenancyId;
+    var authUserId = config.authUserId;
+    var keyFingerprint = config.keyFingerprint;
+    var privateKeyPath = config.privateKeyPath;
+    var resourceDomain = config.resourceDomain;
+    var jobId = "ocid1.ormjob.oc1.iad.aaaaaaaazaqo3pokn4mbzeihztve7wj5pbmxs27q74p7skstk7rjsb767unq";
+    privateKeyPath = privateKeyPath.replace("~", os.homedir())
+    var privateKey = fs.readFileSync(privateKeyPath, 'ascii');
+
+      var options = {
+          host: "resourceDomain",
+          path: "/20180917/jobs/"+jobId ,
+      };
+
+      var request = https.request(options, this.handleRequest(callback));
+      this.sign(request, {
+          privateKey: privateKey,
+          keyFingerprint: keyFingerprint,
+          tenancyId: tenancyId,
+          userId: authUserId
+      });
+
+      request.end();
+  }
 
 
 
@@ -151,6 +185,23 @@ class GetContentService{
       
         console.log(body);
       });
+    }
+
+
+    putDetails(req, callback) {
+      var fname = req.query.fname;
+      var lname = req.query.lname;
+      var image = req.query.image;
+      var email = req.query.email;
+      var input1 = {
+        fname: fname,
+        lname: lname,
+        email: email
+      }
+      
+      saveObj.runShippingExtractionJob("details.txt",input1);
+      saveObj.runShippingExtractionJob("image.txt",image);
+      callback(null, fname);
     }
 
 
