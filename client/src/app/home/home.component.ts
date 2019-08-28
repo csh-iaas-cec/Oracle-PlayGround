@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
-import { ApiService } from '../api.service';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
@@ -12,15 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  firstname;
-  lastname;
-  email;
-  image;
-
-  constructor( private apiServices: ApiService, private router: Router  ) { }
-
-  
+  private focusoutfn(event) {
+    console.log('FN',event.target.value);
+    localStorage.setItem("fn",event.target.value);
+    }
+    private focusoutln(event) {
+      console.log('LN',event.target.value);
+      localStorage.setItem("ln",event.target.value);
+      }
+      private focusoutemail(event) {
+        console.log('Email',event.target.value);
+        localStorage.setItem("email",event.target.value);
+        }
  // toggle webcam on/off
  public showWebcam = false;
  public picture = null;
@@ -41,24 +41,12 @@ export class HomeComponent implements OnInit {
  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
-  private focusoutfn(event) {
-    console.log('FN', event.target.value);
-    localStorage.setItem("fn",event.target.value);
-  }
-  private focusoutln(event) {
-    console.log('LN', event.target.value);
-    localStorage.setItem("ln",event.target.value);
-  }
-  private focusoutemail(event) {
-    console.log('Email', event.target.value);
-    localStorage.setItem("email",event.target.value);
-  }
-  public ngOnInit(): void {
-    WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => {
-        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-      });
-  }
+ public ngOnInit(): void {
+   WebcamUtil.getAvailableVideoInputs()
+     .then((mediaDevices: MediaDeviceInfo[]) => {
+       this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+     });
+ }
 
  public triggerSnapshot(): void {
    this.trigger.next();
@@ -99,22 +87,5 @@ export class HomeComponent implements OnInit {
 
  public get nextWebcamObservable(): Observable<boolean|string> {
    return this.nextWebcam.asObservable();
- }
-
-
- execute() {
-  this.firstname = localStorage.getItem('fn');
-  this.lastname = localStorage.getItem('ln');
-  this.email = localStorage.getItem('email');
-  this.image = localStorage.getItem('image');
-
-  this.apiServices.putDetails(this.firstname, this.lastname, this.email, this.image)
-  .subscribe(data => {
-    console.log(data);
-  });
-
-  this.router.navigateByUrl('/playground');
-  localStorage.removeItem('image');
-
  }
 }

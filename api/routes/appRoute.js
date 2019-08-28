@@ -17,8 +17,4 @@ module.exports = function(app){
     app.route('/api/getJob')
         .post(git.getJob);
 
-    app.route('/api/putDetails')
-        .get(git.putDetails);
-
-
 }

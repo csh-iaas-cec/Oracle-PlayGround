@@ -55,16 +55,3 @@ exports.getJob = function(req,res,next){
         }
     });
 }
-
-exports.putDetails = function(req, res, next) {
-    var putDetails = new GetContentService();
-    console.log(req.query)
-    putDetails.putDetails(req,function(err, result){
-        if(err){
-            return next(err);
-        }else{
-           
-            res.send(result);
-        }
-    });
-}
