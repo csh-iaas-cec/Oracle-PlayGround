@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ApiService {
   localhost_URL: any;
   constructor(public http: HttpClient) {
-    this.localhost_URL = 'http://localhost:3200';
+    this.localhost_URL = 'https://132.145.141.18';
   }
 
   getJobState(jobId): Observable<any> {

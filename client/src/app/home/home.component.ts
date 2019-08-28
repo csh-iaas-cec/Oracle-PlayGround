@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   lastname;
   email;
   image;
+  tempImage;
 
   constructor( private apiServices: ApiService, private router: Router  ) { }
 
@@ -107,8 +108,8 @@ export class HomeComponent implements OnInit {
   this.lastname = localStorage.getItem('ln');
   this.email = localStorage.getItem('email');
   this.image = localStorage.getItem('image');
-
-  this.apiServices.putDetails(this.firstname, this.lastname, this.email, this.image)
+  this.tempImage = "https://drive.google.com/uc?id=1J9S95FtwefSF7hlscpsUVOYhv9Vr_AyZ&export=download";
+  this.apiServices.putDetails(this.firstname, this.lastname, this.email, this.tempImage)
   .subscribe(data => {
     console.log(data);
   });
