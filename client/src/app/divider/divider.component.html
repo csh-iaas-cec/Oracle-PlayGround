@@ -1,0 +1,70 @@
+<div class="title">
+  Customer Experience
+</div>
+<div class="sec"><hr></div>
+
+<div cdkDropListGroup>
+  <div id="col-1">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" id='region' class="active" data-slide="next"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="display-text">Region</div>
+          <div class="display-smaller-text">Select a region</div>
+          <app-resource-selector class="content" [items]="items" [isTier]="false" ></app-resource-selector>
+        </div>
+        <div class="carousel-item">
+            <div class="display-text">Availability Domain</div>
+            <div class="display-smaller-text">Select an Availability Domain</div>
+            <app-resource-selector [items]="ads" [isTier]="false" style="font-size: 80%"></app-resource-selector>
+        </div>
+        <div class="carousel-item">
+            <div class="display-text">Tier</div>
+            <div class="display-smaller-text">Select a Tier</div>
+            <app-resource-selector [items]="tiers" [isTier]="false"></app-resource-selector>
+        </div>
+        <div class="carousel-item">
+          <div class="display-text">Application</div>
+          <div class="display-smaller-text">Select an Application</div>
+          <app-resource-selector [items]="platforms"></app-resource-selector>
+        </div>
+        <div class="carousel-item">
+          <div class="display-text">Deployment</div>
+          <div class="display-smaller-text">Deployment Information</div>
+          <ol class="dep">
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected region : <span style="color: #F29111">{{selectedRegion}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected AD :  <span style="color: #00758F">{{selectedAd}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected Subnet : <span style="color: #3A913F">{{selectedTier}}</span>
+            </li>
+            <li ngModel="selectedRegion" class="dep_li">
+              Selected Application : <span style="color: #f98bf9">{{selectedPlatform}}</span>
+            </li>
+          </ol>
+        </div>
+        
+        
+        
+      </div>
+      
+    </div>    
+  </div>
+
+  <div id="col-2">
+    <app-display-resource [region]="region" [ad]="ad" [tier]="tier" [platform]="platform" (emittedRegion)='getRegion($event)' (emittedAd)="getAd($event)" (emittedTier)="getTier($event)" (emittedPlatform)="getPlatform($event)" ></app-display-resource>
+  </div>
+  
+
+  
+</div>
+

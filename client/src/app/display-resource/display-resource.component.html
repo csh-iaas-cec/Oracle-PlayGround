@@ -1,0 +1,65 @@
+<div
+  *ngIf="!region.length"
+  cdkDropList
+  [cdkDropListData]="region"
+  class="select-region"
+  (cdkDropListDropped)="dropRegion($event)">
+  <h3 class="centered">Drag and Drop a Region</h3>
+</div>
+<div *ngIf="region.length"
+  class="select-region-highlight">
+  <div *ngFor="let item of region"
+    class="decorate-region-text" >Region : {{item}}
+  </div>
+  <div
+    *ngIf="!ad.length" 
+    cdkDropList
+    [cdkDropListData]="ad"
+    class="select-ad"
+    (cdkDropListDropped)="dropAd($event)">
+    <h3 class="centered">Drag and Drop an AD</h3>
+  </div>
+  <div
+    *ngIf="ad.length"
+    class="select-ad-highlight">
+    <div *ngFor="let item of ad" 
+      class="decorate-ad-text">AD : {{item | slice: -4}}       
+    </div>
+    <div
+      *ngIf="!tier.length"
+      cdkDropList
+      [cdkDropListData]="tier"
+      class="select-tier"
+      (cdkDropListDropped)="dropTier($event)">
+      <h3 class="centered">Drag and Drop a Tier</h3>
+    </div>
+    <div
+      *ngIf="tier.length"
+      class="select-tier-highlight">
+      <div *ngFor="let item of tier"
+        class="decorate-tier-text" >Public {{item}}  ::   Port: 8080/443
+      </div>
+      <div
+        *ngIf="!platform.length"
+        cdkDropList
+        [cdkDropListData]="platform"
+        class="select-tier"
+        (cdkDropListDropped)="dropPlatform($event)">
+        <h3 class="centered">Drag and Drop a Platform</h3>
+      </div>
+      <div
+        *ngIf="platform.length">
+        <div *ngFor="let item of platform"
+          class="example-box" >{{item}}
+        </div>
+        <!---->
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<button *ngIf="completed" (click)="deploy()">
+  Deploy
+</button>

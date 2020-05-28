@@ -1,0 +1,256 @@
+'use strict';
+var request = require("request");
+
+var bodyParser = require('body-parser');
+
+
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
+var config = require('../config')
+var fs = require('fs');
+var https = require('https');
+var os = require('os');
+var httpSignature = require('http-signature');
+var jsSHA = require("jssha");
+var saveObj = require('./saveObject.js')
+
+
+
+class GetContentService{
+
+
+  
+  sign(request, options) {
+
+    var apiKeyId = options.tenancyId + "/" + options.userId + "/" + options.keyFingerprint;
+
+    var headersToSign = [
+        "host",
+        "date",
+        "(request-target)"
+    ];
+
+    var methodsThatRequireExtraHeaders = ["POST", "PUT"];
+
+    if(methodsThatRequireExtraHeaders.indexOf(request.method.toUpperCase()) !== -1) {
+        options.body = options.body || "";
+
+        var shaObj = new jsSHA("SHA-256", "TEXT");
+        shaObj.update(options.body);
+
+        request.setHeader("Content-Length", options.body.length);
+        request.setHeader("x-content-sha256", shaObj.getHash('B64'));
+
+        headersToSign = headersToSign.concat([
+            "content-type",
+            "content-length",
+            "x-content-sha256"
+        ]);
+    }
+
+    httpSignature.sign(request, {
+        key: options.privateKey,
+        keyId: apiKeyId,
+        headers: headersToSign
+    });
+
+    var newAuthHeaderValue = request.getHeader("Authorization").replace("Signature ", "Signature version=\"1\",");
+    request.setHeader("Authorization", newAuthHeaderValue);
+  }
+
+  handleRequest(callback) {
+
+    return function(response) {
+        var responseBody = "";
+
+        response.on('data', function(chunk) {
+          responseBody += chunk;
+        });
+
+        response.on('end', function() {
+            console.log(responseBody);            
+            callback(null, JSON.parse(responseBody));
+        });
+    }
+  }
+
+  // putImage(req, callback) {
+  //   var tenancyId = config.tenancyId;
+  //   var authUserId = config.authUserId;
+  //   var keyFingerprint = config.keyFingerprint;
+  //   var privateKeyPath = config.privateKeyPath;
+  //   privateKeyPath = privateKeyPath.replace("~", os.homedir())
+  //   var privateKey = fs.readFileSync(privateKeyPath, 'ascii');
+  //   var options = {
+  //     host: "objectstorage.us-ashburn-1.oraclecloud.com",
+  //     path: "/n/orasenatdhubsred01/b/kishore/o/image.txt" ,
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json"
+  //     }
+  //   };
+  //   var request = https.request(options, this.handleRequest(callback));
+  //   var body = JSON.stringify({ input: "Kumar" })
+  //   this.sign(request, {
+  //     body: body,
+  //     privateKey: privateKey,
+  //     keyFingerprint: keyFingerprint,
+  //     tenancyId: tenancyId,
+  //     userId: authUserId
+  //   });
+
+  //   request.end(body);
+  // }
+
+  
+
+  getJob(req, callback) {
+
+    var tenancyId = config.tenancyId;
+    var authUserId = config.authUserId;
+    var keyFingerprint = config.keyFingerprint;
+    var privateKeyPath = config.privateKeyPath;
+    var resourceDomain = config.resourceDomain;
+    var jobId = "ocid1.ormjob.oc1.iad.aaaaaaaazaqo3pokn4mbzeihztve7wj5pbmxs27q74p7skstk7rjsb767unq";
+    privateKeyPath = privateKeyPath.replace("~", os.homedir())
+    var privateKey = fs.readFileSync(privateKeyPath, 'ascii');
+
+      var options = {
+          host: "resourceDomain",
+          path: "/20180917/jobs/"+jobId ,
+      };
+
+      var request = https.request(options, this.handleRequest(callback));
+      this.sign(request, {
+          privateKey: privateKey,
+          keyFingerprint: keyFingerprint,
+          tenancyId: tenancyId,
+          userId: authUserId
+      });
+
+      request.end();
+  }
+
+
+
+    getContentCall(req,callback){
+          var options = { method: 'GET',
+          url: 'https://api.github.com/repos/csh-iaas-cec/Oracle-PlayGround/contents/var.tf',
+          headers: 
+           { 'cache-control': 'no-cache',
+             Connection: 'keep-alive',
+             Host: 'api.github.com',
+             'Cache-Control': 'no-cache',
+             Accept: '*/*',
+             'User-Agent': 'PostmanRuntime/7.15.0',
+             //auth to be added
+             'Content-Type': 'application/json' } };
+        
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+        
+        //   console.log(response);
+          callback(null,body);
+        });
+    }
+
+    putContentCall(req,callback){
+        // console.log("=== request for upload===",req);
+         let data = req.body; 
+         
+         console.log("data of put", data);
+        //  console.log("data of put", data.content.sha);
+        //  console.log("data of content", data.content.content);
+        //  console.log("data of put", data.payload.region);
+        // let buff = new Buffer.alloc(data);  
+        // let base64data = buff.toString('base64');
+        var options = { method: 'PUT',
+        url: 'https://api.github.com/repos/csh-iaas-cec/Oracle-PlayGround/contents/var.tf',
+        headers: 
+         { 'cache-control': 'no-cache',
+           Connection: 'keep-alive',
+           Host: 'api.github.com',
+           'Cache-Control': 'no-cache',
+           Accept: '*/*',
+           'User-Agent': 'PostmanRuntime/7.15.2',
+           
+         },
+        body: 
+         { message: 'my commit message',
+           committer: { name: 'csh-iaas-cec', email: 'ravi.devarakonda@oracle.com' },
+           content: data.content.content,
+           sha: data.content.sha },
+        json: true };
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+      
+        console.log(body);
+      });
+    }
+
+
+    putDetails(req, callback) {
+      var fname = req.query.fname;
+      var lname = req.query.lname;
+      var image = req.query.image;
+      var email = req.query.email;
+      var input1 = {
+        fname: fname,
+        lname: lname,
+        email: email
+      }
+      
+      saveObj.runShippingExtractionJob("details.txt",input1);
+      saveObj.runShippingExtractionJob("image.txt",image);
+      callback(null, fname);
+    }
+
+
+
+    getOcid(req,callback){
+      var options = { method: 'GET',
+      "rejectUnauthorized": false, 
+      url: 'https://k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com/v1/getJobId',
+      headers: 
+       { 'cache-control': 'no-cache',
+         Connection: 'keep-alive',
+         Host: 'k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com',
+         'Cache-Control': 'no-cache',
+         Accept: '*/*',
+         'User-Agent': 'PostmanRuntime/7.15.0',
+         //auth to be added
+         'Content-Type': 'application/json' } };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body);
+      callback(null,body);
+    });
+  }
+
+  getJob(req, callback){
+    var data = req.body;
+    //console.log("jobid in content service",data.jobId);
+    var options = { method: 'POST',
+  url: 'https://k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com/v1/getIp',
+  headers: 
+   { 'cache-control': 'no-cache',
+     Connection: 'keep-alive',
+     Host: 'k5ej4ux2zdbgy6hso3hjqmjesm.apigateway.us-phoenix-1.oci.customer-oci.com',
+     'Cache-Control': 'no-cache',
+     Accept: '*/*',
+     'User-Agent': 'PostmanRuntime/7.15.2',
+     'Content-Type': 'application/json' },
+     
+  body: { jobId : data.jobId},
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  //console.log(body);
+  callback(null,body);
+});
+  }
+}
+module.exports = GetContentService;

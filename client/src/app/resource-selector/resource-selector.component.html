@@ -1,0 +1,23 @@
+
+<div
+  cdkDropList
+  [cdkDropListData]="items"
+  class="example-list"
+  cdkDropListSortingDisabled
+  (cdkDropListDropped)="drop($event)">
+  <!-- <div class="example-box" *ngFor="let item of items"  cdkDrag>{{item}}</div> -->
+  <div class="layout"  *ngFor="let item of items"   >
+    <div class="example-box"  *ngIf="showBox(item); else grey_out " cdkDrag>
+      {{item}}
+    </div>
+    <div class="tier-details" *ngIf="item=='Tier1'">
+      <p>This will setup a public subnet</p>
+    </div>
+    <ng-template #grey_out>
+      <div class="example-box-grey">{{item}}</div>
+    </ng-template>
+    <div class="tier-details" *ngIf="item=='Tier2'">
+      <p>This will setup 1 private and 1 public subnet</p>
+    </div>
+  </div>
+</div>
